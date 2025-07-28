@@ -44,7 +44,21 @@
     </style>
 </head>
 <body>
+    <div style="text-align: right">
+        {% if request.user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}" style="display: inline">
+            {% csrf_token %}
+            <button>logout</button>
+        </form>
+        {{ request.user.username }}
+        {% else %}
+        <a href="{% url 'login' %}">login</a>
+        <a href="{% url 'signup' %}">signup</a>
+        {% endif %}
+
+    </div>
     <div class="container">
+
         <h1>Todo List</h1>
         <ul>
             {% for todo in data %}

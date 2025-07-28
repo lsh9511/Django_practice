@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3bbd0a96-33cf-4ccd-a5e3-68e287b36eec" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/django_oz_homework.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/poetry.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/todo_info.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/todo_list.html" afterDir="false" />
-    </list>
+    <list default="true" id="3bbd0a96-33cf-4ccd-a5e3-68e287b36eec" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1753349018550</updated>
-      <workItem from="1753349019681" duration="8013000" />
+      <workItem from="1753349019681" duration="8275000" />
     </task>
     <servers />
   </component>
