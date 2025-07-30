@@ -16,7 +16,7 @@ from django.urls import reverse
 
 # Create your views here.
 def todo_list(request):
-    todo_list = Todo.objects.filter(User=request.user).order_by('-created_at')
+    todo_list = Todo.objects.filter(user=request.user).order_by('-created_at')
     q = request.GET.get('q')
 
     if q:		    # 만약 쿼리파라미터가 존재하면 todo_list에서 해당 쿼리파라미터로 filter를 걸어 조건에 맞는 Todo객체만 가져옵니다.
@@ -24,9 +24,10 @@ def todo_list(request):
 
     paginator = Paginator(todo_list, 10) # Paginator 객체를 인스턴스화 합니다.
     page_number = request.GET.get('page') # GET 요청으로부터 page에 담긴 쿼리 파라미터 값을 가져옴
-    page_obj = paginator.get_page(page_number) # 가져온 페이지 숫자를 이용해서 페이지에 대한 오브젝트를 가져옵니다.
+    page_object = paginator.get_page(page_number) # 가져온 페이지 숫자를 이용해서 페이지에 대한 오브젝트를 가져옵니다.
     context = {
-        'page_obj': page_obj
+        'object_list': page_object.object_list,
+        'page_obj': page_object
     }
     return render(request, 'todo_list.html', context)
 
@@ -43,7 +44,7 @@ def todo_create(request):
     form = TodoForm(request.POST or None)
     if form.is_valid():
         todo = form.save(commit=False)
-        todo.User = request.user
+        todo.user = request.user
         todo.save()
         return redirect(reverse('todo_list'),kwargs={'todo_id':todo.pk})
     context = {'form' : form }
@@ -51,7 +52,7 @@ def todo_create(request):
 
 @login_required()
 def todo_update(request, pk):
-    todo = get_object_or_404(Todo, pk=pk, User=request.user)
+    todo = get_object_or_404(Todo, pk=pk, user=request.user)
 
     form = TodoUpdateForm(request.POST or None, instance=todo)
     if form.is_valid():
@@ -64,6 +65,6 @@ def todo_update(request, pk):
 @login_required()
 @require_http_methods(['POST'])
 def todo_delete(request, todo_id):
-    todo = get_object_or_404(Todo, id=todo_id, User=request.user)
+    todo = get_object_or_404(Todo, id=todo_id, user=request.user)
     todo.delete()
     return redirect(reverse('todo_list'))

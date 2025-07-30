@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% block content %}
-    <style>
+<style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -38,7 +37,7 @@
             color: #333;
         }
     </style>
-</head>
+{% block content %}
 <body>
 
     <div class="container">
@@ -46,8 +45,8 @@
         <h1>{{ request.user.username }}'s Todo List</h1>
 
         <ul>
-            {% for todo in page_obj %}
-                <li><a href="{% url 'todo_info' todo.id %}">{{ todo.title }}</a></li>
+            {% for todo in object_list %}
+                <li><a href="{% url 'cb_todo_info' todo.id %}">{{ todo.title }}</a></li>
             {% endfor %}
         </ul>
     </div>

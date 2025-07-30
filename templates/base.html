@@ -7,11 +7,11 @@
 <body>
 <nav style="display: flex; justify-content: space-between">
   <div>
-    <a style="font-size: 20px" href={% url 'todo_list' %}>Home</a>
+    <a style="font-size: 20px" href={% url 'cb_todo_list' %}>Home</a>
   </div>
   <div style="text-align: right">
         {% if request.user.is_authenticated %}
-        <form method="post" action="{% url 'todo_create' %}" style="display: inline">
+        <form method="post" action="{% url 'cb_todo_create' %}" style="display: inline">
             {% csrf_token %}
             <button>추가하기</button>
         </form>
