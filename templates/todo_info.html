@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,18 +36,19 @@
         }
     </style>
 </head>
+{% block content %}
 <body>
     <div class="container">
         <h1>{{ todo.title }}</h1>
         <div>
-            <button class="button-group" onclick="location.href='{% url 'todo_update' todo.id %}'">수정하기</button>
-            <button class="button-group" id="delete-button" onclick="location.href='{% url 'todo_delete' todo.id %}'">삭제하기</button>
+            <button class="button-group" onclick="location.href='{% url 'cb_todo_update' todo.pk %}'">수정하기</button>
+            <button class="button-group" id="delete-button" onclick="location.href='{% url 'cb_todo_delete' todo.pk %}'">삭제하기</button>
         </div>
         <div>
             <h2>{{todo.description}}</h2>
             <h3>start date :{{todo.start_date}}</h3><br>
             <h3>end date : {{todo.end_date}}</h3><br>
-            <h3>결과 {{is_completed}}</h3>
+            <h3>결과 :{{is_completed}}</h3>
         </div>
     </div>
 </body>
