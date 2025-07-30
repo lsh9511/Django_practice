@@ -23,7 +23,12 @@ from users import views as users_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.todo_list,name='todo_list'),
-    path('<int:todo_id>/',views.todo_info, name='todo_info'),
+    path('<int:pk>/',views.todo_info, name='todo_info'),
+    path('create/',views.todo_create, name='todo_create'),
+    path('<int:pk>/update',views.todo_update, name='todo_update'),
+    path('<int:pk>/delete',views.todo_delete, name='todo_delete'),
+
+
     path('accounts/',include('django.contrib.auth.urls')),
     path('signup/',users_views.signup, name='signup'),
     path('login/',users_views.login, name='login'),
