@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User List</title>
+{% extends 'base.html' %}
+{% block content %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,50 +40,44 @@
     </style>
 </head>
 <body>
-    <div style="text-align: right">
-        {% if request.user.is_authenticated %}
-        <form method="post" action="{% url 'logout' %}" style="display: inline">
-            {% csrf_token %}
-            <button>logout</button>
-        </form>
-        {{ request.user.username }}
-        {% else %}
-        <a href="{% url 'login' %}">login</a>
-        <a href="{% url 'signup' %}">signup</a>
-        {% endif %}
 
-    </div>
     <div class="container">
 
-        <h1>Todo List</h1>
+        <h1>{{ request.user.username }}'s Todo List</h1>
+
         <ul>
-            {% for todo in data %}
+            {% for todo in page_obj %}
                 <li><a href="{% url 'todo_info' todo.id %}">{{ todo.title }}</a></li>
             {% endfor %}
         </ul>
     </div>
+ <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% else %}
+            <p>&laquo; First</p>
+            <p>Previous</p>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if num > page_obj.number|add:-3 and num < page_obj.number|add:3 %}
+                {% if num == page_obj.number %}
+                    <span class="active" style="border-radius: 4px; background-color: #fff122">{{ num }}</span>
+                {% else %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+        {% else %}
+            <p>Next</p>
+            <p>Last &raquo;</p>
+        {% endif %}
+    </div>
+</div>
 </body>
-</html>
-
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--    <h1>해야 할 일</h1>-->
-<!--    <h2>-->
-<!--        {% for homework in homeworks %}-->
-<!--        <a href="/todo/{{ todo.id}}">-->
-<!--            {{ homework.title }}-->
-<!--        </a>-->
-<!--        {% endfor %}-->
-<!--    </h2>-->
-<!--</body>-->
-<!--</html>-->
+{% endblock %}

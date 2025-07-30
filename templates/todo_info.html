@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,39 +39,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>{{ data.title }}</h1>
-        <table>
-            {% for key, value in data.items %}
-                {% if key != 'title' %}
-                    <tr>
-                        <th>{{ key }}</th>
-                        <td>{{ value }}</td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        </table>
+        <h1>{{ todo.title }}</h1>
+        <div>
+            <button class="button-group" onclick="location.href='{% url 'todo_update' todo.id %}'">수정하기</button>
+            <button class="button-group" id="delete-button" onclick="location.href='{% url 'todo_delete' todo.id %}'">삭제하기</button>
+        </div>
+        <div>
+            <h2>{{todo.description}}</h2>
+            <h3>start date :{{todo.start_date}}</h3><br>
+            <h3>end date : {{todo.end_date}}</h3><br>
+            <h3>결과 {{is_completed}}</h3>
+        </div>
     </div>
 </body>
-</html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--    <h1> {{ homework.title }}-->
-<!--        <hr>-->
-<!--        {{ homework.description }}-->
-<!--        <hr>-->
-<!--        {{ homework.start_date }}-->
-<!--        <hr>-->
-<!--        {{ homework.end_date }}-->
-<!--        <hr>-->
-<!--        {{ homework.is_completed }}-->
-<!--    </h1>-->
-
-<!--</body>-->
-<!--</html>-->
+{% endblock %}
