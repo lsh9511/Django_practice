@@ -19,25 +19,28 @@ from django.urls import path, include
 from homework import views, cb_views
 from users import views as users_views
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     #FBV
-    path('',views.todo_list,name='todo_list'),
-    path('<int:pk>/',views.todo_info, name='todo_info'),
-    path('create/',views.todo_create, name='todo_create'),
-    path('<int:pk>/update',views.todo_update, name='todo_update'),
-    path('<int:pk>/delete',views.todo_delete, name='todo_delete'),
+    # path('',views.todo_list,name='todo_list'),
+    # path('<int:pk>/',views.todo_info, name='todo_info'),
+    # path('create/',views.todo_create, name='todo_create'),
+    # path('<int:pk>/update',views.todo_update, name='todo_update'),
+    # path('<int:pk>/delete',views.todo_delete, name='todo_delete'),
 
-    #CBV
-    path('cb/',cb_views.TodoListView.as_view(), name='cb_todo_list'),
-    path('cb/create/',cb_views.TodoCreateView.as_view(), name='cb_todo_create'),
-    path('cb/<int:pk>/',cb_views.TodoDetailView.as_view(), name='cb_todo_info'),
-    path('cb/<int:pk>/update/',cb_views.TodoUpdateView.as_view(), name='cb_todo_update'),
-    path('cb/<int:pk>/delete/',cb_views.TodoDeleteView.as_view(), name='cb_todo_delete'),
+    path('', include('homework.urls')),
+
+
 
 
     path('accounts/',include('django.contrib.auth.urls')),
     path('signup/',users_views.signup, name='signup'),
     path('login/',users_views.login, name='login'),
     ]
+
+
+
+
+
+
+
