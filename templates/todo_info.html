@@ -34,7 +34,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1>{{ todo.title }}</h1>
                 <div class="d-flex">
-                    <button class="btn btn-primary me-2" onclick="location.href='{% url 'todo_update' todo.pk %}'">수정하기</button>
+                    <button class="btn btn-primary me-2" onclick="location.href='{% url 'todo_update' todo.pk  %}'">수정하기</button>
                     <form method="POST" action="{% url 'todo_delete' todo.pk %}">
                         {% csrf_token %}
                         <button id="delete-button" type="submit" class="btn btn-danger ">삭제하기</button>
@@ -42,7 +42,10 @@
                 </div>
         </div>
         <div>
-            <h2>{{todo.description}}</h2>
+            {% if todo.get_thumbnail_image_url %}
+              <img src="{{ todo.get_thumbnail_image_url }}" alt="" class="col-2">
+            {% endif %}
+            <h2>{{todo.description | safe}}</h2>
             <h3>start date :{{todo.start_date}}</h3><br>
             <h3>end date : {{todo.end_date}}</h3><br>
             <h3>결과 :{{is_completed}}</h3>

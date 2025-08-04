@@ -5,7 +5,7 @@ from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from homework.forms import CommentForm
+from homework.forms import CommentForm, TodoForm, TodoUpdateForm
 from homework.models import Todo, Comment
 
 
@@ -49,7 +49,7 @@ class TodoDetailView(LoginRequiredMixin,DetailView):
 class TodoCreateView(LoginRequiredMixin,CreateView):
     model = Todo
     template_name = 'todo_create.html'
-    fields = ('title','description','start_date','end_date')
+    form_class = TodoForm
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -63,7 +63,7 @@ class TodoCreateView(LoginRequiredMixin,CreateView):
 class TodoUpdateView(LoginRequiredMixin,UpdateView):
     model = Todo
     template_name = 'todo_update.html'
-    fields = ('title','description','start_date','end_date', 'is_completed')
+    form_class =TodoUpdateForm
 
     def get_object(self,queryset=None):
         self.object = super().get_object(queryset)
