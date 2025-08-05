@@ -9,19 +9,26 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import json
 from pathlib import Path
+
+from django.conf import settings
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+with open(BASE_DIR / '.config_secret'/'secret.json') as f:
+    config_secret_str = f.read()
+
+SECRET = json.loads(config_secret_str)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f)o0*+$8dc8anggih*20#*a^5(+mx!c59w(%%tgj1(9kvb+^9^'
+SECRET_KEY = SECRET["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -145,6 +152,9 @@ LOGOUT_REDIRECT_URL = '/'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+#auth
+AUTH_USER_MODEL = 'users.User'
+
 SUMMERNOTE_CONFIG = {
     # Using SummernoteWidget - iframe mode, default
     'iframe': True,
@@ -184,3 +194,11 @@ SUMMERNOTE_CONFIG = {
     # Set to `False` to return attachment paths in relative URIs.
     'attachment_absolute_uri': True,
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.naver.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = SECRET["email"]["user"]
+EMAIL_HOST_PASSWORD = SECRET["email"]["password"]
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
