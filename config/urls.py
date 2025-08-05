@@ -30,14 +30,15 @@ urlpatterns = [
     # path('<int:pk>/delete',views.todo_delete, name='todo_delete'),
 
     path('', include('homework.urls')),
+    path('', include('users.urls')),
     path('summernote/', include('django_summernote.urls')),
 
 
 
 
-    path('accounts/',include('django.contrib.auth.urls')),
-    path('signup/',users_views.signup, name='signup'),
-    path('login/',users_views.login, name='login'),
+    # path('accounts/',include('django.contrib.auth.urls')),
+    # path('signup/',users_views.signup, name='signup'),
+    # path('login/',users_views.login, name='login'),
     ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

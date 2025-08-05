@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>회원가입</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button>submit</button>
-    </form>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="w-50">
+        <form method="POST">
+            <div class="d-flex justify-content-start">
+                <h1 class="mb-5 text-center">회원가입</h1>
+            </div>
+            {% csrf_token %}
+            {% include 'include/form.html' %}
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary mt-5 col-4">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
